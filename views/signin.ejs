@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In</title>
+    <link
+      href="../public/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="../public/css/shop-homepage.css" rel="stylesheet" />
+    <!-- Font awesome-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.css"
+      integrity="sha512-LKG0Zi6duJ5mwncLtQVchN0iF8fWmcxApuX9pqGq7ITgwQDWR9EqZFsrV9TXfE9pPRa1J6GVnsBl7gKxAyllaA=="
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <%- include('partials/nav.ejs') %>
+    <div class="container">
+      <h3> Sign In!</h3>
+      <% if (hasErrors) { %>
+        <div class="alert alert-danger">
+          <% for(var i=0;i<messages.length;i++) { %>
+            <p> <%= messages[i] %> </p> 
+          <%} %>
+        </div>
+
+      <%}%>
+      <form class="signin" method="POST" action="/user/signin">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+        </div>
+        <input type="hidden" name="_csrf" value= <%= token %> > 
+        <button type="submit" class="btn btn-primary submit">Submit</button>
+      </form>
+    </div>
+
+    <!-- Footer-->
+    <%- include('partials/footer.ejs') %>
+    <script src="../public/vendor/jquery/jquery.min.js"></script>
+    <script src="../public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
